@@ -1,0 +1,19 @@
+ci: true
+debug: false
+plugins:
+  - - '@semantic-release/commit-analyzer'
+    - preset: angular
+  - - '@semantic-release/release-notes-generator'
+    - preset: angular
+      writerOpts:
+        commitsSort:
+          - subject
+          - scope
+  - '@semantic-release/github'
+publish:
+  - '@semantic-release/github'
+repositoryUrl: https://github.com/playgroundtech/terraform-aws-github-actions-oidc
+verifyConditions:
+  - '@semantic-release/github'
+branches:
+  - master

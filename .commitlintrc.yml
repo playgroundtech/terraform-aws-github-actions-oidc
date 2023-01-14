@@ -1,0 +1,8 @@
+# See rules: https://github.com/conventional-changelog/commitlint/blob/master/docs/reference-rules.md
+extends:
+  - '@commitlint/config-conventional'
+rules:
+  subject-case: [ 1, 'always', 'lower-case' ] # Warn but don't error on subject-case
+  subject-full-stop: [ 0, 'never', '.' ] # Disable error on subject-full-stop
+  body-max-line-length: [ 2, 'always', 'Infinity' ]
+  footer-max-line-length: [ 1, 'always', 100 ] # Warn but don't error on footer length because it's silly

@@ -1,0 +1,27 @@
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v5
+  pre-commit:
+    name: Pre-Commit
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Update Repo
+        run: brew update
+      - name: Install Deps
+        run: brew install pre-commit git-secrets tflint terraform-docs terraform || true
+      - name: Terraform init
+        run: terraform init
+      - name: Check Pre Commit
+        run: pre-commit run --show-diff-on-failure -a
+
+name: PR checks
+on:
+  - pull_request
