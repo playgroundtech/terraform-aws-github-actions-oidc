@@ -16,7 +16,7 @@ jobs:
       - name: Update Repo
         run: brew update
       - name: Install Deps
-        run: brew install pre-commit git-secrets tflint terraform-docs terraform || true
+        run: brew install pre-commit gitleaks tflint tfsec terraform-docs terraform || true
       - name: Terraform init
         run: terraform init
       - name: Check Pre Commit
