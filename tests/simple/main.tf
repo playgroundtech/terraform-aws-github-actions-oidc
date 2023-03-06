@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-north-1"
-}
-
 data "aws_iam_policy" "view_only" {
   name = "ViewOnlyAccess"
 }
