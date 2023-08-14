@@ -5,19 +5,20 @@ package test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestSimple(t *testing.T) {
 	// Create a random unique ID for the role name
 	randomId := random.UniqueId()
 	roleName := fmt.Sprintf("terratest-%v", randomId)
-	workingDir := "../tests/simple"
+	workingDir := "../simple"
 
 	// Randomize the region
 	region := aws.GetRandomRegion(t, []string{"eu-north-1", "us-east-1"}, nil)
