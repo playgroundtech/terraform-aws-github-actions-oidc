@@ -26,14 +26,15 @@ sequenceDiagram
 ### Usages
 
 The module is at the time of writing super opinionated in how the AWS IAM Open ID Connect Provider is created. The only
-thing the user needs to be concerned about is the `var.condition`. This needs to be set up the trust policy for
+thing the user needs to be concerned about is the `var.conditions`. This needs to be set up the trust policy for
 the `sub` field, which is explained
-more [here.](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws)
-We currently don't intend supporting GitHub Environments. However, this might be changed in the future.
+further [here.](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws)
+
+Multiple fields apart from the required `sub` field are supported for more granular permissions, a reference to the contents of the OIDC token can be found [here.](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token)
 
 ### Examples
 
-Check out the [examples](./examples) folder for using the module.
+Check out the [examples/simple](./examples/simple/) directory for using the module.
 
 <!-- BEGIN_TF_DOCS -->
 ## Resources
@@ -48,7 +49,7 @@ Check out the [examples](./examples) folder for using the module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_condition"></a> [condition](#input\_condition) | Github conditions to apply to the AWS Role. E.g. from which org/repo/branch is it allowed to be run. | `string` | n/a | yes |
+| <a name="input_conditions"></a> [conditions](#input\_conditions) | Github conditions to apply to the AWS Role. E.g. from which org/repo/branch is it allowed to be run. Key is used as the JWT claim and value as the claim value. | `map(string)` | n/a | yes |
 | <a name="input_policy_arn"></a> [policy\_arn](#input\_policy\_arn) | List of ARNs of IAM policies to attach to IAM role. | `list(string)` | n/a | yes |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the AWS Role which will be used to run Github Actions. | `string` | n/a | yes |
 | <a name="input_role_max_sessions_duration"></a> [role\_max\_sessions\_duration](#input\_role\_max\_sessions\_duration) | Maximum session duration (in seconds) that you want to set for the specified role. | `number` | `3600` | no |

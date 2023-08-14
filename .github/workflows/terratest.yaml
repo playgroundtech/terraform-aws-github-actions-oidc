@@ -4,7 +4,7 @@ jobs:
     runs-on: "ubuntu-latest"
     defaults:
       run:
-        working-directory: tests
+        working-directory: examples/tests
 
     steps:
       # Checkout the repository to the GitHub Actions runner

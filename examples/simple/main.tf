@@ -3,8 +3,10 @@ data "aws_iam_policy" "view_only" {
 }
 
 module "aws_github_actions_oidc" {
-  source     = "../../"
-  role_name  = var.role_name
-  condition  = "playgroundtech/terraform-aws-github-actions-oidc:*"
+  source    = "../../"
+  role_name = var.role_name
+  conditions = {
+    "sub" = "repo:playgroundtech/example:*"
+  }
   policy_arn = [data.aws_iam_policy.view_only.arn]
 }

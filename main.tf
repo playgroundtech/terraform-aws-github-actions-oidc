@@ -23,10 +23,13 @@ data "aws_iam_policy_document" "github_actions" {
       values   = ["sts.amazonaws.com"]
     }
 
-    condition {
-      test     = "StringLike"
-      variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.condition}"]
+    dynamic "condition" {
+      for_each = var.conditions
+      content {
+        test     = "StringLike"
+        variable = "token.actions.githubusercontent.com:${condition.key}"
+        values   = [condition.value]
+      }
     }
 
     principals {

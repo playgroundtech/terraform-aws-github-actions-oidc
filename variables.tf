@@ -1,6 +1,10 @@
-variable "condition" {
-  description = "Github conditions to apply to the AWS Role. E.g. from which org/repo/branch is it allowed to be run."
-  type        = string
+variable "conditions" {
+  description = "Github conditions to apply to the AWS Role. E.g. from which org/repo/branch is it allowed to be run. Key is used as the JWT claim and value as the claim value."
+  type        = map(string)
+  validation {
+    condition     = contains(keys(var.conditions), "sub")
+    error_message = "The key \"sub\" must be present within the conditions map."
+  }
 }
 
 variable "policy_arn" {
